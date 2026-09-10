@@ -4,6 +4,14 @@ const scores=[
             {name:'赵六',score:77},
             {name:'孙七',score:59},
             {name:'周八',score:88},
-            {name:'吴九',score:105},
-            {name:'郑十',score:-3}
+            {name:'吴九',score:105},  //故意混入非法值：满分100
+            {name:'郑十',score:-3}  //负分
             ];
+            const cleanScores=(list)=>list.filter(s=>s.score>=0&&s.score<=100);  //清洗：只保留0至100之间的合法成绩
+            const average=(list)=>{
+                if(list.length===0) return 0;
+                const total=list.reduce((sum,s)=>sum+s.score,0);
+                return(total/list.length).toFixed(2);  //平均分
+            };
+            const highest=(list)=>list.reduce((max,s)=>s.score>max.score?s:max,list[0]);  //最高分
+            const failed=(list)=>list.filter(s=>s.score<60).map(s=>s.name);  //不及格名单
